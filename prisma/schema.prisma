@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+//providers: postgresql,mysql,sqlserver
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Song{
+  id Int @id @default(autoincrement())
+  title String @db.VarChar(120)
+  year Int
+  genre String
+  author Author @relation(fields: [authorId], references: [id])
+  authorId Int
+  albums AlbumWithSongs[]
+  playlists PlaylistWithSongs[]
+}
+
+model Album{
+  id Int @id @default(autoincrement())
+  name String
+  year Int
+  genre String
+  songs AlbumWithSongs[]
+}
+
+model Author{
+  id Int @id @default(autoincrement())
+  name String
+  songs Song[]
+}
+
+model Playlist{
+  id Int @id @default(autoincrement())
+  name String
+  songs PlaylistWithSongs[]
+}
+
+model AlbumWithSongs{
+  album Album @relation(fields: [albumId], references: [id])
+  albumId Int
+  song Song @relation(fields: [songId], references: [id])
+  songId Int
+
+  @@id([albumId, songId])
+}
+
+model PlaylistWithSongs{
+  playlist Playlist @relation(fields: [playlistId], references: [id])
+  playlistId Int
+  song Song @relation(fields: [songId], references: [id])
+  songId Int
+
+  @@id([playlistId, songId])
+}
