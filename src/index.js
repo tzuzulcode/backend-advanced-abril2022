@@ -2,6 +2,9 @@ const express = require("express")
 
 const app = express()
 
+//Mongoose
+// uri: mongodb://mongo/myDB
+
 
 app.get("/",(req,res)=>{
     return res.send("<h1>Hola mundo</h1>")
