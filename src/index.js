@@ -1,19 +1,26 @@
 const express = require("express")
+const {connection} = require("./config/database")
+
+const userModel = require("./models/user")
 
 const app = express()
 
 //Mongoose
 // uri: mongodb://mongo/myDB
 
+connection()
 
-app.get("/",(req,res)=>{
-    return res.send("<h1>Hola mundo</h1>")
+
+app.get("/",async (req,res)=>{
+    const users = await userModel.find()
+    return res.json(users)
 })
 
 app.get("/contacto",(req,res)=>{
     return res.json({
         nombre:"Tzuzul",
-        correo:"mail@tzuzulcode.com"
+        correo:"mail@tzuzulcode.com",
+        telefono:12312312312
     })
 })
 

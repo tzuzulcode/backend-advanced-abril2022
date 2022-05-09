@@ -9,11 +9,11 @@ COPY package*.json .
 
 RUN npm install
 
-COPY /src .
+COPY /src /src
 
 EXPOSE 4000
 
-CMD [ "node","index.js" ]
+CMD [ "npm","run","dev" ]
 
 # Investigar acerca de los Dockerfile
 # Crear container de Nginx
