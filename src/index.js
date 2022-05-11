@@ -20,7 +20,7 @@ app.get("/contacto",(req,res)=>{
     return res.json({
         nombre:"Tzuzul",
         correo:"mail@tzuzulcode.com",
-        telefono:12312312312
+        telefono:232323
     })
 })
 

@@ -11,6 +11,7 @@ services:
   app:
     container_name: app
     build: .
+    command: npm run dev 
     ports:
       - "4000:4000"
     depends_on:
