@@ -6,6 +6,42 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model User{
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(100)
+  email String @unique
+  password String
+  active Boolean
+  createdAt DateTime @default(now())
+  folders Folder[]
+  files File[]
+}
+
+model Folder{
+  id Int @id @default(autoincrement())
+  name String
+  createdAt DateTime @default(now())
+  owner User @relation(fields: [ownerId],references: [id])
+  ownerId Int
+  parentFolder Folder? @relation("FolderSubFolder",fields: [parentFolderId],references: [id])
+  parentFolderId Int?
+  childFolders Folder[] @relation("FolderSubFolder")
+  files File[]
+}
+
+model File{
+  id Int @id @default(autoincrement())
+  name String
+  createdAt DateTime @default(now())
+  owner User @relation(fields: [ownerId],references: [id])
+  ownerId Int
+  folder Folder? @relation(fields: [folderId],references: [id])
+  folderId Int?
+}
+
+// Implementar las suscripciones
+
