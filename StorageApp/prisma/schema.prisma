@@ -19,6 +19,7 @@ model User{
   createdAt DateTime @default(now())
   folders Folder[]
   files File[]
+  subscription Subscription?
 }
 
 model Folder{
@@ -45,3 +46,16 @@ model File{
 
 // Implementar las suscripciones
 
+model Subscription{
+  id Int @id @default(autoincrement())
+  type SubscriptionType @default(FREE)
+  createdAt DateTime @default(now())
+  user User @relation(fields: [userID], references: [id])
+  userID Int
+}
+
+enum SubscriptionType{
+  FREE
+  PREMIUM
+  ENTERPRISE
+}
