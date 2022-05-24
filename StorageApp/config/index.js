@@ -1,9 +1,7 @@
 require("dotenv").config() // Cargar las variables de entorno del .env
 
 const config = {
-    name:process.env.NAME
+    bucketName:process.env.BUCKET_NAME
 }
-
-console.log(process.env.NAME)
 
 module.exports = config

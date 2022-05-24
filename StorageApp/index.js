@@ -1,10 +1,6 @@
 const express = require("express")
-const { name } = require("./config")
-
 
 const app = express()
-
-console.log(name)
 
 app.get("/",(req,res)=>{
     return res.json({
