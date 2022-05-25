@@ -1,6 +1,13 @@
 const express = require("express")
+const { port } = require("./config")
+
+// Importacion de rutas
+const files = require("./routes/files")
 
 const app = express()
+
+// uso de rutas
+files(app)
 
 app.get("/",(req,res)=>{
     return res.json({
@@ -9,6 +16,6 @@ app.get("/",(req,res)=>{
 })
 
 
-app.listen(4000,()=>{
-    console.log("Listening on: http://localhost:"+4000)
+app.listen(port,()=>{
+    console.log("Listening on: http://localhost:"+port)
 })
