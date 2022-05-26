@@ -1,6 +1,6 @@
 const express = require("express")
-const uploadFiles = require("../libs/storage")
-const uploadFile = require("../middleware/uploadFile")
+const FilesService = require("../services/files")
+const upload = require("../middleware/uploadFile")// Middleware de carga de archivos
 
 function files(app){
     const router = express.Router()
@@ -8,9 +8,11 @@ function files(app){
     app.use("/api/files",router)
 
 
-    router.post("/upload",uploadFile.array("files"),(req,res)=>{
+    router.post("/upload",upload.array("files"),async (req,res)=>{
         
-        uploadFiles(req.files)
+        const results = await uploadFiles(req.files)
+
+        console.log(results)
 
         return res.json({
             success:true,
