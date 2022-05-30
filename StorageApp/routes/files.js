@@ -4,20 +4,16 @@ const upload = require("../middleware/uploadFile")// Middleware de carga de arch
 
 function files(app){
     const router = express.Router()
+    const filesServ = new FilesService()
 
     app.use("/api/files",router)
 
 
     router.post("/upload",upload.array("files"),async (req,res)=>{
         
-        const results = await uploadFiles(req.files)
+        const results = await filesServ.uploadMany(req.files,req.body.id)
 
-        console.log(results)
-
-        return res.json({
-            success:true,
-            message:"Upload successful"
-        })
+        return res.json(results)
     })
 }
 
