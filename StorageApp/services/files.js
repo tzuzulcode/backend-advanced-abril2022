@@ -1,9 +1,16 @@
-const {uploadFiles} = require("../libs/storage")
+const {uploadFiles,deleteFile} = require("../libs/storage")
 const {PrismaClient} = require("@prisma/client")
 
 const client = new PrismaClient()
 
 class Files{
+
+    async getAll(){
+        const files = await client.file.findMany()
+
+        return files
+    }
+
     async uploadMany(files,idUser){
         const results = await uploadFiles(files)
 
@@ -36,6 +43,40 @@ class Files{
         })
 
         return await (await Promise.allSettled(uploadedFiles)).map(result=>result.value)
+    }
+
+
+    async deleteMany(files){
+        const resultPromises = files.map(async (file)=>{
+            const result = await deleteFile(file)
+            if(result.success){
+                try {
+                    const deletedFile = await client.file.delete({
+                        where:{
+                            name:result.fileName
+                        }
+                    })
+    
+                    return {
+                        success:true,
+                        file:deletedFile
+                    }
+                } catch (error) {
+                    return {
+                        success:false,
+                        message: "File deleted. DB error"
+                    }
+                }
+            }else{
+                return result
+            }
+        })
+
+        return await (await Promise.allSettled(resultPromises)).map(result=>{
+            console.log(result)
+            
+            return result.value
+        })
     }
 }
 

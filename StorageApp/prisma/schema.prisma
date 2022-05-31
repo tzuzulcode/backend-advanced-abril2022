@@ -36,7 +36,7 @@ model Folder{
 
 model File{
   id Int @id @default(autoincrement())
-  name String //Google cloud name
+  name String @unique //Google cloud name
   originalName String // Original Name
   createdAt DateTime @default(now())
   owner User @relation(fields: [ownerId],references: [id])

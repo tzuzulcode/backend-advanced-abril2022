@@ -8,12 +8,26 @@ function files(app){
 
     app.use("/api/files",router)
 
+    router.get("/",async (req,res)=>{
+        const files = await filesServ.getAll()
+
+        return res.json(files)
+    })
+
 
     router.post("/upload",upload.array("files"),async (req,res)=>{
         
         const results = await filesServ.uploadMany(req.files,req.body.id)
 
-        return res.json(results)
+        return res.status(200).json(results)
+    })
+
+
+    router.delete("/delete",async (req,res)=>{
+        const {files} = req.body
+        const result = await filesServ.deleteMany(files)
+
+        return res.json(result)
     })
 }
 
