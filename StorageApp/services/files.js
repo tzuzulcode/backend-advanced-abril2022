@@ -1,4 +1,4 @@
-const {uploadFiles,deleteFile} = require("../libs/storage")
+const {uploadFiles,deleteFile, downloadFile} = require("../libs/storage")
 const {PrismaClient} = require("@prisma/client")
 
 const client = new PrismaClient()
@@ -9,6 +9,24 @@ class Files{
         const files = await client.file.findMany()
 
         return files
+    }
+
+    async get(fileName,res){
+        const file = await client.file.findUnique({
+            where:{
+                name:fileName
+            }
+        })
+
+        if(file){
+            return await downloadFile(fileName,res)
+        }
+
+
+        return {
+            success:false,
+            message:"File not found"
+        }
     }
 
     async uploadMany(files,idUser){

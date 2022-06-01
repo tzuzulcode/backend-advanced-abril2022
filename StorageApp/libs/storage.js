@@ -41,6 +41,31 @@ const uploadFile = (file)=>{
     })
 }
 
+const downloadFile = async (fileName,res) =>{
+    const file = storage.bucket(bucketName).file(fileName)
+    const stream = file.createReadStream()
+
+    return new Promise((resolve,reject)=>{
+        stream.on("error",(error)=>{
+            console.log(error)
+            reject({
+                success:false,
+                message:"An error ocurred",
+                error
+            })
+        })
+    
+        stream.pipe(res)
+        
+        stream.on("end",()=>{
+            resolve({
+                success:true,
+                message:"Downloaded succesfully"
+            })
+        })
+    })
+}
+
 const deleteFile = async (fileName) =>{
     const file = storage.bucket(bucketName).file(fileName)
     try {
@@ -70,5 +95,6 @@ const uploadFiles = async (files)=>{
 module.exports = {
     uploadFile,
     uploadFiles,
+    downloadFile,
     deleteFile
 }
