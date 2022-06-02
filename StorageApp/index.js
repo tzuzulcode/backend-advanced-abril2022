@@ -3,6 +3,7 @@ const { port } = require("./config")
 
 // Importacion de rutas
 const files = require("./routes/files")
+const folders = require("./routes/folders")
 const users = require("./routes/users")
 
 const app = express()
@@ -12,6 +13,7 @@ app.use(express.json())
 
 // uso de rutas
 files(app)
+folders(app)
 users(app)
 
 app.get("/",(req,res)=>{
