@@ -50,6 +50,7 @@ model File{
 model Subscription{
   id Int @id @default(autoincrement())
   type SubscriptionType @default(FREE)
+  stripeCustomerId String @unique
   createdAt DateTime @default(now())
   user User @relation(fields: [userID], references: [id])
   userID Int

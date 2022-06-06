@@ -1,4 +1,6 @@
+const { stripeSecretKey } = require("../config")
 const client = require("../libs/db")
+const stripe = require("stripe")(stripeSecretKey)
 
 class Users{
     async getAll(){
@@ -9,12 +11,21 @@ class Users{
 
     async create(data){
         try {
+            const customer = await stripe.customers.create({
+                email:data.email,
+                name:data.name
+            })
             const user = await client.user.create({
                 data:{
                     name:data.name,
                     email:data.email,
                     password:data.password,
-                    active:true
+                    active:true,
+                    subscription:{
+                        create:{
+                            stripeCustomerId:customer.id
+                        }
+                    }
                 }
             })
     

@@ -5,6 +5,7 @@ const { port } = require("./config")
 const files = require("./routes/files")
 const folders = require("./routes/folders")
 const users = require("./routes/users")
+const subscriptions = require("./routes/subscriptions")
 
 const app = express()
 
@@ -15,6 +16,7 @@ app.use(express.json())
 files(app)
 folders(app)
 users(app)
+subscriptions(app)
 
 app.get("/",(req,res)=>{
     return res.json({
