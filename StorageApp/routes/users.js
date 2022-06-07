@@ -19,7 +19,12 @@ function users(app){
 
         return res.json(user)
     })
+    
+    router.delete("/:id",async (req,res)=>{
+        const user = await userServ.delete(req.params.id)
 
+        return res.json(user)
+    })
 }
 
 

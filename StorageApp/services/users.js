@@ -4,7 +4,11 @@ const stripe = require("stripe")(stripeSecretKey)
 
 class Users{
     async getAll(){
-        const users = await client.user.findMany()
+        const users = await client.user.findMany({
+            include:{
+                subscription:true
+            }
+        })
 
         return users
     }
@@ -26,6 +30,9 @@ class Users{
                             stripeCustomerId:customer.id
                         }
                     }
+                },
+                include:{
+                    subscription:true
                 }
             })
     
@@ -35,6 +42,16 @@ class Users{
 
             return {error}
         }
+    }
+
+    async delete(id){
+        const user = await client.user.delete({
+            where:{
+                id:Number.parseInt(id)
+            }
+        })
+
+        return user
     }
 }
 
