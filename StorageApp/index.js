@@ -1,4 +1,5 @@
 const express = require("express")
+const cors = require("cors")
 const { port } = require("./config")
 
 // Importacion de rutas
@@ -10,6 +11,9 @@ const subscriptions = require("./routes/subscriptions")
 const app = express()
 
 // Usando middleware
+app.use(cors({
+    origin:["http://localhost:3000"]
+}))
 app.use(express.json())
 
 // uso de rutas
