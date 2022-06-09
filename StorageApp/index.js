@@ -7,12 +7,17 @@ const files = require("./routes/files")
 const folders = require("./routes/folders")
 const users = require("./routes/users")
 const subscriptions = require("./routes/subscriptions")
+const webhooks = require("./routes/webhooks")
 
 const app = express()
 
 // Usando middleware
 app.use(cors({
     origin:["http://localhost:3000"]
+}))
+
+app.use("/api/webhooks/stripe",express.raw({
+    type:"application/json"
 }))
 app.use(express.json())
 
@@ -21,6 +26,7 @@ files(app)
 folders(app)
 users(app)
 subscriptions(app)
+webhooks(app)
 
 app.get("/",(req,res)=>{
     return res.json({
