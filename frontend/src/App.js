@@ -5,6 +5,10 @@ import {
   useStripe,
   useElements
 } from '@stripe/react-stripe-js'
+import {
+  PayPalScriptProvider,
+  PayPalButtons
+} from '@paypal/react-paypal-js'
 import { useEffect, useState } from 'react'
 
 
@@ -60,12 +64,36 @@ const PaymentForm = () =>{
 
 function App() {
 
+  const createPayPalSubscription = (data,actions)=>{
+    return actions.subscription.create({
+      'plan_id':'P-3XT7942048806484FMKRWRZA'
+    })
+  }
+
   return (
     <>
       <h1>Formulario de pago</h1>
       <Elements stripe={stripe}>
         <PaymentForm/>
       </Elements>
+      <PayPalScriptProvider options={{
+        "client-id":"AbRzoW7gcghQsM3Ie-wU374DyvMm5eT8ro7_hcGuU83fQmHwWaGyGIO1Jgfl3vjTZKNGKDmASYbRblcb",
+        "intent":"subscription",
+        "components":"buttons",
+        "vault":true
+      }}>
+        <PayPalButtons
+          style={{
+            layout:"horizontal",
+            color:"blue",
+            label:"subscribe"
+          }}
+          createSubscription={createPayPalSubscription}
+          onApprove={(data,actions)=>{
+            console.log(data.subscriptionID)
+          }}
+        />
+      </PayPalScriptProvider>
     </>
   );
 }
