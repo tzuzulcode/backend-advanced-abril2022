@@ -1,3 +1,4 @@
+const paypalClient = require("../libs/paypalClient")
 const { stripeSecretKey } = require("../config");
 const client = require("../libs/db")
 const stripe = require("stripe")(stripeSecretKey)
@@ -22,6 +23,8 @@ class Subscription{
             clientSecret: subscription.latest_invoice.payment_intent.client_secret
         }
     }
+
+    
 
     async activateSubscription(idCustomer,subscriptionId,type){
         const user = await client.subscription.update({

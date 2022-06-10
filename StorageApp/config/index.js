@@ -6,7 +6,8 @@ const config = {
     stripePublicKey:process.env.STRIPE_PUBLIC_KEY,
     stripeSecretKey:process.env.STRIPE_SECRET_KEY,
     paypalPublicKey:process.env.PAYPAL_PUBLIC_KEY,
-    paypalSecretKey:process.env.PAYPAL_SECRET_KEY
+    paypalSecretKey:process.env.PAYPAL_SECRET_KEY,
+    paypalApiUrl: process.env.PAYPAL_API_URL
 }
 
 module.exports = config
