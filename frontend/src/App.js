@@ -64,10 +64,18 @@ const PaymentForm = () =>{
 
 function App() {
 
-  const createPayPalSubscription = (data,actions)=>{
-    return actions.subscription.create({
-      'plan_id':'P-3XT7942048806484FMKRWRZA'
+  const createPayPalSubscription = async ()=>{
+    const response = await fetch("http://localhost:4000/api/subscriptions/create/paypal",{
+      headers:{
+        "Content-Type":"application/json"
+      },
+      method:"POST",
+      body:JSON.stringify({
+        userID:"1",
+        planID:'P-3XT7942048806484FMKRWRZA'
+      })
     })
+    return await response.json()
   }
 
   return (
