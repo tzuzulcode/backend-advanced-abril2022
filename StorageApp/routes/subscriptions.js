@@ -14,6 +14,13 @@ function subscriptions(app){
 
         return res.json(result)
     })
+    router.post("/create/paypal",async (req,res)=>{
+        const {userID,planID} = req.body
+
+        const result = await subscriptionServ.createSubscriptionPayPal(userID,planID)
+
+        return res.json(result)
+    })
 }
 
 

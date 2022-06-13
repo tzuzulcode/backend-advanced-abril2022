@@ -24,7 +24,14 @@ class Subscription{
         }
     }
 
-    
+    async createSubscriptionPayPal(idUser,planID){
+        const response = await paypalClient.post("/v1/billing/subscriptions",{
+            'plan_id':planID
+        })
+        console.log(response.data)
+
+        return response.data
+    }
 
     async activateSubscription(idCustomer,subscriptionId,type){
         const user = await client.subscription.update({

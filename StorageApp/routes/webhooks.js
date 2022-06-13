@@ -14,6 +14,13 @@ function webhooks(app){
 
         return res.status(success?200:400).send(message)
     })
+    router.post("/paypal",async (req,res)=>{
+        // const sig = req.headers['stripe-signature'];
+
+        console.log(req.body)
+
+        return res.status(200).send("OK")
+    })
 
 }
 
