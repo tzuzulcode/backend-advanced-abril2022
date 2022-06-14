@@ -52,6 +52,7 @@ model Subscription{
   type SubscriptionType @default(FREE)
   stripeCustomerId String @unique
   stripeSubscriptionId String?
+  paypalSubscriptionId String?
   createdAt DateTime @default(now())
   user User @relation(fields: [userID], references: [id], onDelete: Cascade)
   userID Int

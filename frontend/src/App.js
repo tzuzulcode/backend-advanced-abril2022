@@ -71,11 +71,12 @@ function App() {
       },
       method:"POST",
       body:JSON.stringify({
-        userID:"1",
+        userID:4,
         planID:'P-3XT7942048806484FMKRWRZA'
       })
     })
-    return await response.json()
+    const data = await response.json()
+    return data.subscription.id
   }
 
   return (
