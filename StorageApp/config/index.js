@@ -1,4 +1,6 @@
-require("dotenv").config() // Cargar las variables de entorno del .env
+require("dotenv").config({
+    path:`.env.${process.env.NODE_ENV}`
+}) // Cargar las variables de entorno del .env
 
 const config = {
     port:process.env.PORT,
