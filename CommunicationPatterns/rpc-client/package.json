@@ -1,8 +1,8 @@
 {
-  "name": "communicationpatterns",
+  "name": "rpc-client",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "rpc-client.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,10 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@node-rpc/server": "^2.2.0",
-    "axios": "^0.27.2",
-    "express": "^4.18.1",
-    "soap": "^0.45.0",
-    "xml2js": "^0.4.23"
+    "@node-rpc/client": "^2.3.1",
+    "express": "^4.18.1"
   }
 }
