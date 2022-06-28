@@ -1,0 +1,20 @@
+syntax = "proto3"; //Protocol buffer version -> 3
+
+package ecommerce;
+
+service Products {
+    rpc addProduct (Product) returns (ProductID);
+    rpc getProduct (ProductID) returns (Product);
+}
+
+
+// User-defined types:
+message Product {
+    string id = 1; // Field
+    string name = 2;
+    string description= 3;
+}
+
+message ProductID {
+    string value = 1;
+}
