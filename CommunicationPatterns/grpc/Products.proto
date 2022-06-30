@@ -3,8 +3,8 @@ syntax = "proto3"; //Protocol buffer version -> 3
 package ecommerce;
 
 service Products {
-    rpc addProduct (Product) returns (ProductID);
-    rpc getProduct (ProductID) returns (Product);
+    rpc addProduct (Product) returns (ProductID){};
+    rpc getProduct (ProductID) returns (Product){};
 }
 
 

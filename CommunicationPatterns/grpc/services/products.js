@@ -1,3 +1,7 @@
+const productsProto = require("../protos/products")
+
+const productsService = productsProto.Products.service
+
 const methods = {
     addProduct(product){
         console.log(product)
@@ -15,5 +19,7 @@ const methods = {
     }
 }
 
-
-module.exports = methods
+module.exports = {
+    productsService,
+    methods
+}
