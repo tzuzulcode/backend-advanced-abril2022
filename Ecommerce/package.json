@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "migrate:mysql:test": "dotenv -e .env.test -- npx prisma migrate deploy",
+    "migrate:mysql:dev": "dotenv -e .env.development -- npx prisma migrate deploy",
     "test": "dotenv -e .env.test -- npx prisma migrate dev && mocha",
-    "dev": "dotenv -e .env.development -- npx nodemon index.js",
+    "dev": "cross-env NODE_ENV=development dotenv -e .env.development -- npx nodemon index.js",
     "start": "node index.js"
   },
   "keywords": [],
@@ -14,6 +15,8 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^4.0.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-graphql": "^0.12.0",
     "graphql": "^15.8.0",
