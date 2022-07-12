@@ -6,6 +6,7 @@ const ProductsService = require("../services/products")
 describe('Products',function(){
     this.timeout(6000)
     let productsServ
+    let id
     before(async ()=>{
         productsServ = new ProductsService()
         await productsServ.deleteAll()
@@ -22,6 +23,7 @@ describe('Products',function(){
             price:100.5,
             description:"Descripción del producto"
         })
+        id = product.id
 
         expect(product).be.a("object")
     })
@@ -31,5 +33,17 @@ describe('Products',function(){
 
         expect(products).be.a("array")
         expect(products.length).not.equal(0)
+    })
+    it("Should get a product", async ()=>{
+        const product = await productsServ.getByID(id)
+
+        expect(product).be.a("object")
+        // expect(product.id).to.exist
+        expect(product).to.be.deep.equal({
+            id,
+            name:"Producto test",
+            price:100.5,
+            description:"Descripción del producto"
+        })
     })
 })

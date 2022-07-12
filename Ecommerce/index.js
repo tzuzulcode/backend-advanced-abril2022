@@ -4,6 +4,7 @@
 
 const express = require("express")
 const graphql = require("./routes/graphql")
+const auth = require("./routes/auth")
 
 
 
@@ -14,6 +15,7 @@ app.use(express.json())
 
 // Usando routes
 graphql(app)
+auth(app)
 
 // app.get("/",async (req,res)=>{
 //     const source = req.body.query

@@ -1,12 +1,17 @@
-const {buildSchema} = require("graphql")
+const {buildSchema,GraphQLError} = require("graphql")
 const ProductsService = require("./products")
 const productsServ = new ProductsService()
 
 const rootValue = {
     products: productsServ.getAll,
     createProduct: async (data)=>await productsServ.create(data.product),
-    product:async(data)=>{
-        console.log(data)
+    product:async(data,context)=>{
+        const {logged,user} = context
+        if(logged && user.role==="REGULAR"){
+            return await productsServ.getByID(data.id)
+        }
+
+        return new GraphQLError("Not allowed")
     },
     hello:()=>{return "Hello world!!"}
 }

@@ -6,7 +6,7 @@
   "scripts": {
     "migrate:mysql:test": "dotenv -e .env.test -- npx prisma migrate deploy",
     "migrate:mysql:dev": "dotenv -e .env.development -- npx prisma migrate deploy",
-    "test": "dotenv -e .env.test -- npx prisma migrate dev && mocha",
+    "test": "dotenv -e .env.test -- npx prisma migrate dev && cross-env NODE_ENV=test mocha",
     "dev": "cross-env NODE_ENV=development dotenv -e .env.development -- npx nodemon index.js",
     "start": "node index.js"
   },
@@ -20,6 +20,7 @@
     "express": "^4.18.1",
     "express-graphql": "^0.12.0",
     "graphql": "^15.8.0",
+    "jsonwebtoken": "^8.5.1",
     "prisma": "^4.0.0"
   },
   "devDependencies": {

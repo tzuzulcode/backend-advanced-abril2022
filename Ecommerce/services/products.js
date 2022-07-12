@@ -7,6 +7,16 @@ class Products{
         return products
     }
 
+    async getByID(id){
+        const product = await prisma.product.findUnique({
+            where:{
+                id
+            }
+        })
+
+        return product
+    }
+
     async create(data){
         const product = await prisma.product.create({
             data
