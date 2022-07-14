@@ -4,6 +4,7 @@
 
 const express = require("express")
 const graphql = require("./routes/graphql")
+const apollo = require("./routes/apollo")
 const auth = require("./routes/auth")
 
 
@@ -15,6 +16,7 @@ app.use(express.json())
 
 // Usando routes
 graphql(app)
+apollo(app)
 auth(app)
 
 // app.get("/",async (req,res)=>{
