@@ -1,7 +1,35 @@
 type Query{
     hello:String
-    products:[Product]
+    products(filter:FilterInput, orderBy:OrderInput):[Product]
     product(id:Int!):Product
+}
+
+enum OrderType{
+    desc
+    asc
+}
+
+input OrderInput{
+    price: OrderType
+    name: OrderType
+    # stars: OrderType
+}
+
+input FilterInput{
+    name: TextFilterInput
+    price: NumberFilterInput
+    # stars: NumberFilterInput
+}
+
+input NumberFilterInput{
+    gt: Float
+    gte: Float
+    lt: Float
+    lte: Float
+}
+
+input TextFilterInput{
+    contains:String
 }
 
 type Product{

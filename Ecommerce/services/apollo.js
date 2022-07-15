@@ -7,7 +7,7 @@ const {AuthenticationError} = require("apollo-server-express")
 
 const resolvers = {
     Query:{
-        products: productsServ.getAll,
+        products: async(parent,args,context,info)=>productsServ.getAll(args.filter,args.orderBy),
         product:async(parent, args, context, info)=>{
             const {logged,user} = context
             if(logged && user.role==="REGULAR"){

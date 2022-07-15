@@ -1,8 +1,11 @@
 const prisma = require("../libs/db")
 
 class Products{
-    async getAll(){
-        const products = await prisma.product.findMany()
+    async getAll(filter,orderBy){
+        const products = await prisma.product.findMany({
+            where:filter,
+            orderBy
+        })
 
         return products
     }
